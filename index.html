@@ -256,6 +256,56 @@ margin-bottom:5px;
 font-size:13px;
 opacity:.6;
 }
+/* PREMIUM GİRİŞ ANİMASYONLARI */
+
+.hero h1,
+.hero p{
+opacity:0;
+transform:translateY(40px);
+animation:fadeUp 1s ease forwards;
+}
+
+.hero p{
+animation-delay:.3s;
+}
+
+@keyframes fadeUp{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* SCROLL ANİMASYONU */
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:1s cubic-bezier(.17,.67,.45,1);
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ETKİNLİK KARTLARI PREMIUM */
+.card{
+transition:all .5s cubic-bezier(.17,.67,.45,1);
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.05);
+box-shadow:0 25px 50px rgba(0,0,0,.6);
+}
+
+/* YÖNETİM KARTLARI PREMIUM */
+.uye-card{
+transition:all .6s cubic-bezier(.17,.67,.45,1);
+}
+
+.uye-card:hover{
+transform:translateY(-15px) scale(1.04);
+box-shadow:0 25px 50px rgb
 
 </style>
 </head>
@@ -271,22 +321,22 @@ opacity:.6;
 <h2>Etkinliklerimiz</h2>
 <div class="cards">
 
-<div class="card" onclick="openModal('modal1')">
+<div class="card reveal" onclick="openModal('modal1')">
 <h3>Cumhuriyet Haftası</h3>
 <p>Detayları görmek için tıklayın.</p>
 </div>
 
-<div class="card" onclick="openModal('modal2')">
+<div class="card reveal" onclick="openModal('modal2')">
 <h3>Adliye Gezisi</h3>
 <p>Detayları görmek için tıklayın.</p>
 </div>
 
-<div class="card" onclick="openModal('modal3')">
+<div class="card reveal" onclick="openModal('modal3')">
 <h3>Hukuk Sohbetleri</h3>
 <p>Detayları görmek için tıklayın.</p>
 </div>
 
-<div class="card" onclick="openModal('modal4')">
+<div class="card reveal" onclick="openModal('modal4')">
 <h3>Çalıştay</h3>
 <p>Detayları görmek için tıklayın.</p>
 </div>
@@ -470,10 +520,28 @@ content.style.display = "none";
 content.style.display = "block";
 }
 }
+/* SCROLL REVEAL ANİMASYONU */
+function revealOnScroll(){
+const reveals = document.querySelectorAll(".reveal");
+
+reveals.forEach(el=>{
+const windowHeight = window.innerHeight;
+const elementTop = el.getBoundingClientRect().top;
+const visible = 120;
+
+if(elementTop < windowHeight - visible){
+el.classList.add("active");
+}
+});
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 
 </script>
 
 </body>
 
 </html>
+
 
